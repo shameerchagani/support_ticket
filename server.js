@@ -5,20 +5,30 @@ const router = express.Router();
 const app = express();
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 4000;
-const db = process.env.dbPassword;
+const uri = process.env.uri;
 const passport = require("passport");
 require("./config/passport")(passport);
 const flash = require("connect-flash");
 const session = require("express-session");
 
 //mongoose connection
+// mongoose
+//   .connect(uri)
+//   .then(() => console.log("connected to MongoDB"))
+//   .then(() =>
+//     app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))
+//   )
+//   .catch((err) => console.log(err));
+
 mongoose
-  .connect(db, {})
-  .then(() => console.log("connected to MongoDB"))
+  .connect(uri, {
+    serverSelectionTimeoutMS: 10000, // 10 seconds
+  })
+  .then(() => console.log("MongoDB connected successfully"))
   .then(() =>
     app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))
   )
-  .catch((err) => console.log(err));
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 //Set View Engine : EJS
 app.set("view engine", "ejs");

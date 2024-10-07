@@ -6,7 +6,7 @@ const { forwardAuthenticated } = require("../config/auth");
 const { ensureAuthenticated } = require("../config/auth");
 
 const userController = require("../controlers/userController");
-const entryController = require("../controlers/entryController");
+const entryController = require("../controlers/complaintsController");
 //login handle
 router.get("/login", forwardAuthenticated, (req, res) => {
   res.render("login", { title: "Login", appName: "Codepro Support" });

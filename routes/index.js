@@ -1,7 +1,7 @@
 const express = require("express");
 const { ensureAuthenticated } = require("../config/auth");
 const router = express.Router();
-const entryController = require("../controlers/entryController");
+const complaintsController = require("../controlers/complaintsController");
 
 //login page
 router.get("/", (req, res) => {
@@ -13,48 +13,52 @@ router.get("/", (req, res) => {
 //'===================================
 
 //Get Complaints
-router.get("/complaints", ensureAuthenticated, entryController.complaints_get);
+router.get(
+  "/complaints",
+  ensureAuthenticated,
+  complaintsController.complaints_get
+);
 
 //Add Complaints
 router.post(
   "/addComplaint",
   ensureAuthenticated,
-  entryController.complaints_add_handle
+  complaintsController.complaints_add_handle
 );
 
 //Get Complaints Details
 router.get(
   "/complaints/:id",
   ensureAuthenticated,
-  entryController.complaintDetails_get
+  complaintsController.complaintDetails_get
 );
 
 //Add Comments to Complaints
 router.post(
   "/complaints/:id/comments",
   ensureAuthenticated,
-  entryController.complaintComment_post
+  complaintsController.complaintComment_post
 );
 
 //Update Complaints status as pending
 router.get(
   "/complaintInProgress/:id",
   ensureAuthenticated,
-  entryController.complaint_update_pending
+  complaintsController.complaint_update_pending
 );
 
 //Update Complaints status as inprogress
 router.get(
   "/complaintInProgress/:id",
   ensureAuthenticated,
-  entryController.complaint_update_inProgress
+  complaintsController.complaint_update_inProgress
 );
 
 //Update Complaints status as closed
 router.get(
   "/complaintClose/:id",
   ensureAuthenticated,
-  entryController.complaint_update_close
+  complaintsController.complaint_update_close
 );
 
 module.exports = router;

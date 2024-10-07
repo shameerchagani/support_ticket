@@ -1,6 +1,6 @@
-<footer class="mt-3 fixed-bottom">
+<footer class="mt-3">
     All Rights Reserved. &copy; <span id="year"></span>
-    . software designed for KSB
+    . Codepro Solutions<sup>&reg;</sup>
 </footer>
 
 
@@ -30,30 +30,11 @@
    $(function(){
 
 	//DataTable 
-	//$('#table1').destroy();
-        $('#table1').DataTable({
-            "aLengthMenu": [[-1, 10, 25, 50, 100], ['All', "10 Per Page", "25 Per Page", "50 Per Page", "100 Per Page"]]
-        });
-
-        //$('#table2').destroy();
-        $('#table2').DataTable({
-            "aLengthMenu": [[10, 25, 50, 100], ["10 Per Page", "25 Per Page", "50 Per Page", "100 Per Page"]]
-        })
 	
 	//user table datatable
 	$('#user_table').DataTable({
             "aLengthMenu": [[-1, 10, 25, 50, 100], ['All', "10 Per Page", "25 Per Page", "50 Per Page", "100 Per Page"]]
         });
-
-	//user table datatable
-	$('#products_table').DataTable({
-            "aLengthMenu": [[-1, 10, 25, 50, 100], ['All', "10 Per Page", "25 Per Page", "50 Per Page", "100 Per Page"]]
-        });
-
-	//Stock Table Initialize
-        $('#stockTable').DataTable({
-	   "aLengthMenu": [[-1, 15, 30, 50, 100], ['All', "15 Per Page", "30 Per Page", "50 Per Page", "100 Per Page"]] 
-	});
 
     //Complaints table datatable
 	$('#complaints_table').DataTable({

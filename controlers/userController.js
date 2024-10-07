@@ -16,9 +16,11 @@ const user_login_handle = (req, res, next) => {
 };
 
 //Logout Handler
-const user_logout = (req, res) => {
-  req.logout();
-  req.flash("success_msg", "Now logged out");
+const user_logout = async (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+  });
+  await req.flash("success_msg", "Now logged out");
   res.redirect("/users/login");
 };
 
