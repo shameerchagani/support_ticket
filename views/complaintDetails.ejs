@@ -1,0 +1,119 @@
+<%-include('./partials/header.ejs')%> <%-include('./partials/nav.ejs')%>
+<a href="/complaints" class="btn btn-primary btn-small rounded-pill px-3 mt-3"
+  >Back</a
+>
+<div class="container" style="width: 100%; max-width: 720px; margin: auto">
+  <div
+    class="card shadow-lg rounded d-flex justify-content-between"
+    style="width: 100%; max-width: 720px; margin: auto"
+  >
+    <div class="card-header d-flex align-items-center">
+      <p>
+        <span
+          class="bg-teal text-light"
+          style="
+            padding: 7px 16px;
+            font-size: 26px;
+            font-weight: bold;
+            border-radius: 50%;
+          "
+          ><%=user.name[0]%></span
+        >
+      </p>
+      <p class="mx-3 justify-content-center" style="font-weight: 600">
+        <%=user.name%>
+        <br />
+        <small><%= fromNow %> ago</small>
+      </p>
+      <% if (complaint.status!=='Closed') { %>
+      <p class="alert alert-danger px-1 py-1">
+        <small><%=complaint.status%></small>
+      </p>
+      <% } %>
+      <div class="mx-1">
+        <%if(complaint.status==='Closed'){%>
+        <p class="alert alert-danger text-center">
+          <small class="">Ticket is Closed</small>
+        </p>
+        <%}else{%>
+        <a
+          href="/complaintClose/<%=complaint._id%>"
+          class="btn btn-sm btn-danger rounded-pill ml-3 px-2"
+          title="Close"
+          ><i class="fa fa-circle"><small class="mx-2">Close</small></i></a
+        ><%}%>
+      </div>
+    </div>
+
+    <div class="card-body text-capitalize">
+      <h6 class=""><%= complaint.title %></h6>
+      <p style="font-weight: 400; font-size: 14px">
+        <%= complaint.description %>
+      </p>
+    </div>
+
+    <div class="card-footer">
+      <% if(complaint.status !== "Closed") {%>
+
+      <form action="/complaints/<%= complaint._id %>/comments" method="POST">
+        <div class="row m-auto p-0">
+          <div class="form-group col-10">
+            <input
+              type="text"
+              id="comment"
+              name="comment"
+              class="form-control"
+              placeholder="Add Comment..."
+              required
+            />
+          </div>
+
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <% }else {%>
+      <p class="text-center">
+        <small class="alert alert-secondary p-lg-3">
+          Comments are disabled for this Ticket!
+        </small>
+      </p>
+
+      <%}%>
+    </div>
+  </div>
+
+  <div class="my-2"><%-include ('./partials/messages')%></div>
+
+  <br />
+
+  <h5 class="text-success mt-3">Comments</h5>
+
+  <% if (complaint.comments.length > 0) { %>
+
+  <ul class="list-group mb-5">
+    <% complaint.comments.forEach(comment => { %>
+    <li class="list-group-item">
+      <strong class="text-primary text-capitalize"><%= comment.user %></strong>
+      -
+      <small class="text-secondary"
+        ><%= comment.date.toLocaleDateString('en-GB') %> <%=
+        comment.date.toLocaleTimeString('en-GB') %></small
+      ><br />
+      <span class="text-capitalize"> <%= comment.text %></span>
+    </li>
+    <% }) %>
+  </ul>
+
+  <% } else { %>
+
+  <p class="text-center text-danger">No comments yet</p>
+
+  <% } %>
+</div>
+
+<%- include('./partials/footer.ejs') %>

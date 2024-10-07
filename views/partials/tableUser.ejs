@@ -1,0 +1,35 @@
+<thead class="bg-teal my-5 text-light text-center h6">
+  <tr>
+    <th scope="col">#SN</th>
+    <th>User Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>isActive</th>
+    <th>Actions</th>
+    
+  </tr>
+</thead>
+<tbody class="align-center">
+  <%users.forEach((user,index) => {%>
+  <tr id="<%=user._id%>">
+    <td scope="col"><%= index + 1 %></td>
+    <td scope="col"><%= user.name %></td>
+    <td scope="col"><%= user.email %></td>
+    <td scope="col"><%= user.role %></td>
+    <%if(!user.isActive) {%>
+    <td scope="col" class="bg-danger text-center">
+      <%}else{%><td scope="col" class="bg-success text-center">
+        <%}%>
+      <%= user.isActive %>
+    </td>
+    <td scope="col" class="text-center">
+      <a href="/users/updateUser/<%= user._id %>">
+        <span class="mr-2 px-1"><i class="fa fa-pen text-primary"></i></span>
+      </a>
+      <a href="/users/deleteUser/<%= user._id %>">
+        <span class="mr-2 px-1"><i class="fa fa-trash text-danger"></i></span>
+      </a>
+    </td>
+  </tr>
+  <%})%>
+</tbody>

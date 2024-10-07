@@ -1,0 +1,93 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-custom">
+    <h3><a class="navbar-brand text-warning" href="#">< Store / ></a></h3>
+    <button
+      class="navbar-toggler text-dark"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon text-warning"
+        ><i class="fas fa-bars"></i
+      ></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <% if(user.role !== 'head') {%>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/dashboard"
+            >Home <span class="sr-only">(current)</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/addEntry">Add Entry</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/addItems">Add Items</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/complaints">Complaints</a>
+        </li>
+        <!-- <li class="nav-item">
+              <a class="nav-link" href="/updateEntry">Update Entry</a>
+            </li> -->
+        <li class="nav-item dropdown disabled">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Reports
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/allEntries">All Entries</a>
+            <a class="dropdown-item" href="/recPending">Rec Pending</a>
+            <a class="dropdown-item" href="/receivedReady">Received Ready</a>
+            <a class="dropdown-item" href="/sentInTransit">Sent Intransit</a>
+            <a class="dropdown-item" href="/sentReceived">Sent Received</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/addedItems">View All Items</a>
+            <%if(user.role === 'admin'){%>
+            <a class="dropdown-item" href="/stockItems">Items Stock</a>
+            <hr />
+            <a class="dropdown-item" href="/users/manageUsers">Manage Users</a>
+            <a class="dropdown-item" href="/manageProducts">Manage Products</a>
+            <%}%>
+          </div>
+        </li>
+      </ul>
+      <% } %>
+      <span class="mr-5"
+        >Welcome, <span class="font-bold"><%= user.name %></span></span
+      >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-warning text-dark" href="/users/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<body>
+  <%if(user.role==='admin'){%>
+  <small class="text-light bg-dark float-right px-3 py-0 mx-3 mt-1">
+    <%=(new Date()).toLocaleDateString('en-GB')%> <%=(new
+    Date()).toLocaleTimeString('en-GB')%> </small
+  ><br />
+  <%}%>
+  <div class="preloader" id="preloader"></div>
+  <script>
+    let loader = document.getElementById("preloader");
+    window.addEventListener("load", function () {
+      loader.style.display = "none";
+    });
+  </script>
+</body>

@@ -1,0 +1,66 @@
+<!-- complaints.ejs -->
+<table id="complaints_table" class="table table-striped">
+  <thead class="bg-teal text-light">
+    <tr>
+      <th>##</th>
+      <th>User_Name</th>
+      <th>Complaint_Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Action</th>
+      <th>Date_time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% complaints.forEach((complaint , index) => { %>
+    <tr>
+      <td><%= Number(index+1) %></td>
+      <td>
+        <%= complaint.createdBy %>
+      </td>
+      <td>
+        <a href="/complaints/<%= complaint._id %>">
+          <%= complaint.title.slice(0,20) %><br />
+        <em>comments(<%= complaint.comments.length %>)</em>
+        
+        </a>
+      </td>
+      <td><%= complaint.description.slice(0,46) %></td>
+
+      
+        <% if (complaint.status === 'Pending' || complaint.status === 'pending') { %>
+       <td class="alert alert-danger"><%= complaint.status %></td>
+        <% } else if (complaint.status === 'In-Progress') { %>
+        <td class="alert alert-warning"><%= complaint.status %></td>
+        <% } else if (complaint.status === 'closed' || complaint.status ===
+        'Closed') { %>
+        <td class="alert alert-success"><%= complaint.status %></td>
+        <%}%>
+      </td>
+      <%if(user.role === 'admin' || user.role ==='user'){ %>
+      <td class="text-center">
+        <a href="/complaintClose/<%=complaint._id%>" class="btn btn-sm btn-success" title="Close"
+          ><i class="fa fa-check"></i
+        ></a>
+        <a
+          href="/complaintInProgress/<%= complaint._id %>"
+          class="btn btn-warning btn-sm ml-2"
+          title="In-Progress"
+          ><i class="fa fa-stopwatch"></i
+        ></a>
+        <a href="/complaintPending/<%= complaint._id %>" class="btn btn-danger btn-sm ml-2" title="Pending">
+          <i class="fa fa-hourglass-half"></i>
+          </a>
+      </td>
+      <%}else{%>
+        <td class="text-center"><span class="text-danger"><i class="fa fa-stop"></i></span></td>
+<%}%>
+      <td>
+        <%= complaint.createdAt.toLocaleDateString('en-GB') %> <%=
+        complaint.createdAt.toLocaleTimeString('en-GB') %>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>

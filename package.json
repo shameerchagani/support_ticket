@@ -1,0 +1,47 @@
+{
+  "name": "codepro_support_solution",
+  "version": "1.0.0",
+  "description": "CodePro Support Solutions is a user-friendly ticketing system that allows clients to raise complaints, ensuring efficient tracking and resolution by the organization.",
+  "main": "server.js",
+  "scripts": {
+    "watch": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shameerchagani/support_ticket.git"
+  },
+  "keywords": [
+    "support",
+    "ticketing",
+    "complaint",
+    "helpdesk",
+    "customer-service",
+    "issue-tracking",
+    "SaaS",
+    "user-friendly",
+    "organization",
+    "workflow"
+  ],
+  "author": "CodePro Solutions",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shameerchagani/support_ticket/issues"
+  },
+  "homepage": "https://github.com/shameerchagani/support_ticket#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "moment": "^2.30.1",
+    "mongoose": "^8.7.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
