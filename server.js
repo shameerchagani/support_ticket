@@ -1,7 +1,6 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const router = express.Router();
 const app = express();
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 4000;
@@ -10,16 +9,9 @@ const passport = require("passport");
 require("./config/passport")(passport);
 const flash = require("connect-flash");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
-//mongoose connection
-// mongoose
-//   .connect(uri)
-//   .then(() => console.log("connected to MongoDB"))
-//   .then(() =>
-//     app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))
-//   )
-//   .catch((err) => console.log(err));
-
+//Connect to MongoDB
 mongoose
   .connect(uri, {
     serverSelectionTimeoutMS: 10000, // 10 seconds
@@ -43,6 +35,9 @@ app.use(
     secret: process.env.secret,
     resave: true,
     saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.uri,
+    }),
   })
 );
 

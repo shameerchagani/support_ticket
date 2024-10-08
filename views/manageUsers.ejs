@@ -1,49 +1,82 @@
-
-<%-include('./partials/header.ejs')%>
-<%-include('./partials/nav.ejs')%>
+<%-include('./partials/header.ejs')%> <%- include('./partials/nav.ejs') %>
 <div class="container">
   <div class="mt-2">
-    <div class="card rounded shadow-lg m-auto" style="max-width: 480px;">
-      <div class="card-header bg-success text-light">
-        Create User
-      </div>
+    <div class="card rounded shadow-lg m-auto" style="max-width: 480px">
+      <div class="card-header bg-success text-light">Create User</div>
       <div class="card-body">
         <span><%-include('./partials/messages.ejs')%></span>
         <form action="/users/createUser" method="post">
           <div class="form-group row">
-            <label for="name" class="col-sm-4 justify-content-center">Full Name</label>
+            <label for="name" class="col-sm-4 justify-content-center"
+              >Full Name</label
+            >
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Enter User Name" autofocus required />
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter User Name"
+                autofocus
+                required
+              />
             </div>
           </div>
           <div class="form-group row align-center">
             <label for="email" class="col-sm-4">Email</label>
             <div class="col-sm-8">
-              <input type="email" class="form-control" id="email" name="email" placeholder="Enter User Email" required />
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter User Email"
+                required
+              />
             </div>
           </div>
 
           <div class="form-group row align-center">
             <label for="password" class="col-sm-4">Password</label>
             <div class="col-sm-8">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Enter User Password" required />
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter User Password"
+                required
+              />
             </div>
           </div>
           <div class="form-group row align-center">
             <label for="password2" class="col-sm-4">Confirm</label>
             <div class="col-sm-8">
-              <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm User Password" required />
+              <input
+                type="password"
+                class="form-control"
+                id="password2"
+                name="password2"
+                placeholder="Confirm User Password"
+                required
+              />
             </div>
           </div>
-          
+
           <div class="form-group row align-center">
             <label for="role" class="col-sm-4">Role</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="role" name="role" placeholder="Enter User Role" required />
+              <select name="role" id="role" required class="form-control">
+                <option value="" disabled selected>--Select Role--</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
             </div>
           </div>
           <div class="text-center">
-            <button class="btn btn-outline-success w-75 m-2">Create User</button>
+            <button class="btn btn-outline-success w-75 m-2">
+              Create User
+            </button>
           </div>
         </form>
       </div>
@@ -51,10 +84,12 @@
   </div>
   <div class="mt-5">
     <table id="user_table" class="table table-striped">
-      <caption>Displaying All Users</caption>
+      <caption>
+        Displaying All Users
+      </caption>
       <%-include('./partials/tableUser.ejs')%>
     </table>
   </div>
-</div>    
+</div>
 
 <%-include('./partials/footer.ejs')%>

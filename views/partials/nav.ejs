@@ -27,38 +27,14 @@
             >Home <span class="sr-only">(current)</span></a
           >
         </li>
-
+        <% if (user.role === 'admin' || user.role==='Admin') { %>
         <li class="nav-item">
           <a class="nav-link" href="/users/manageUsers">Manage Users</a>
         </li>
+        <% } %>
 
-        <li class="nav-item dropdown disabled">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Reports
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/allEntries">All Entries</a>
-            <a class="dropdown-item" href="/recPending">Rec Pending</a>
-            <a class="dropdown-item" href="/receivedReady">Received Ready</a>
-            <a class="dropdown-item" href="/sentInTransit">Sent Intransit</a>
-            <a class="dropdown-item" href="/sentReceived">Sent Received</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/addedItems">View All Items</a>
-            <%if(user.role === 'admin'){%>
-            <a class="dropdown-item" href="/stockItems">Items Stock</a>
-            <hr />
-            <a class="dropdown-item" href="/users/manageUsers">Manage Users</a>
-            <a class="dropdown-item" href="/manageProducts">Manage Products</a>
-            <%}%>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/complaints">Complaints</a>
         </li>
       </ul>
       <% } %>
@@ -74,12 +50,6 @@
   </nav>
 </header>
 <body>
-  <%if(user.role==='admin'){%>
-  <small class="text-light bg-dark float-right px-3 py-0 mx-3 mt-1">
-    <%=(new Date()).toLocaleDateString('en-GB')%> <%=(new
-    Date()).toLocaleTimeString('en-GB')%> </small
-  ><br />
-  <%}%>
   <div class="preloader" id="preloader"></div>
   <script>
     let loader = document.getElementById("preloader");

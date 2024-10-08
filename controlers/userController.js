@@ -26,67 +26,69 @@ const user_logout = async (req, res, next) => {
 
 //Add A user to Database
 const user_create_handle = async (req, res) => {
-  const users = await User.find({});
+  const users = await User.find({}); // Fetch all users
   const { name, email, password, password2, role } = req.body;
   let errors = [];
-  //console.log(req.body);
-  //console.log(' Name ' + name + ' email :' + email + ' pass:' + password + 'role:' + role);
+
+  // Check if all fields are filled
   if (!name || !email || !password || !password2 || !role) {
     errors.push({ msg: "Please fill in all fields" });
   }
 
-  //check if match
+  // Check if passwords match
   if (password !== password2) {
-    errors.push({ msg: "passwords dont match" });
+    errors.push({ msg: "Passwords do not match" });
   }
 
+  // If there are errors, re-render the form with the errors
   if (errors.length > 0) {
-    res.render("manageUsers", {
-      errors: errors,
+    return res.render("manageUsers", {
+      errors,
+      name,
+      email,
+      password,
+      password2,
+      role,
+      user: req.user,
+    });
+  }
+
+  try {
+    // Check if the email is already registered
+    const user = await User.findOne({ email: email });
+
+    if (user) {
+      errors.push({ msg: "Email already registered" });
+      return res.render("manageUsers", {
+        errors,
+        users,
+        user: req.user,
+      });
+    }
+
+    // If email is not registered, create a new user
+    const newUser = new User({
       name: name,
       email: email,
       password: password,
-      password2: password2,
       role: role,
-      user: req.user,
     });
-  } else {
-    //validation passed
-    User.findOne({ email: email }).exec((err, user) => {
-      // console.log(user);
-      if (user) {
-        errors.push({ msg: "Email already registered" });
-        res.render("manageUsers", {
-          errors,
-          users,
-          user: req.user,
-        });
-      } else {
-        const newUser = new User({
-          name: name,
-          email: email,
-          password: password,
-          role: role,
-        });
 
-        //hash password
-        bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            //save pass to hash
-            newUser.password = hash;
-            //save user
-            newUser
-              .save()
-              .then((value) => {
-                // console.log(value);
-                req.flash("success_msg", "User Created Successfully");
-                res.redirect("/users/manageUsers");
-              })
-              .catch((value) => console.log(value));
-          })
-        );
-      }
+    // Hash the password before saving the user
+    const salt = await bcrypt.genSalt(10); // Generate salt
+    newUser.password = await bcrypt.hash(newUser.password, salt); // Hash the password
+
+    // Save the new user to the database
+    await newUser.save();
+
+    req.flash("success_msg", "User Created Successfully");
+    res.redirect("/users/manageUsers");
+  } catch (err) {
+    console.error(err);
+    return res.render("manageUsers", {
+      errors: [{ msg: "Something went wrong, please try again later" }],
+      users,
+      user: req.user,
     });
   }
 };
@@ -147,9 +149,9 @@ const user_update_handle = async (req, res, next) => {
 
 //Populate User list
 const user_list = async (req, res) => {
-  if (req.user.role !== "admin") {
-    return res.render("404", { title: "404 - Not found", user: req.user });
-  }
+  // if (req.user.role !== "admin") {
+  //   return res.render("404", { title: "404 - Not found", user: req.user });
+  // }
   const users = await User.find().sort({ name: 1, role: 1 });
   //console.log(users)
   res.render("manageUsers", {

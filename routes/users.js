@@ -19,14 +19,10 @@ router.post("/login", userController.user_login_handle);
 router.get("/logout", userController.user_logout);
 
 //get all users list
-router.get("/manageUsers", ensureAuthenticated, userController.user_list);
+router.get("/manageUsers", userController.user_list);
 
 //create user route
-router.post(
-  "/createUser",
-  ensureAuthenticated,
-  userController.user_create_handle
-);
+router.post("/createUser", userController.user_create_handle);
 
 //update User get route
 router.get(
