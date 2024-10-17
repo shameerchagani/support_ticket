@@ -1,6 +1,21 @@
-<footer class="mt-3 py-3 bg-dark text-white text-center">
-    All Rights Reserved. &copy; <span id="year"></span>
-    . Codepro Solutions<sup style="font-size:20px;">&reg;</sup>
+<footer class="mt-3 py-3 bg-dark text-white d-flex row justify-content-around align-center">
+    <div class="col-sm-6 text-center">
+        All Rights Reserved. &copy; <span id="year"></span>
+        . Codepro Solutions<sup style="font-size:20px;">&reg;</sup><br>
+        <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="">Privacy</a></li>
+            <li><a href="">Terms & Conditions</a></li>
+        </ul>   
+        
+    </div>
+    <div class="col-sm-6 text-center" style="font-size: 1.5em;">
+        <a href="https://github.com/shameerchagani" class="mx-1 px-1 text-light" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/shameer-chagani-59aa211ab" class="mx-1 px-1 text-light" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="" class="mx-1 px-1 text-light"><i class="fab fa-skype" target="_blank"></i></a>
+        <a href="https://gmail.com" class="mx-1 px-1 text-light" target="_blank"><i class="fas fa-envelope"></i></a>
+    </div>
+
 </footer>
 
 
@@ -27,17 +42,17 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 
 <script>
-   $(function(){
+    $(function () {
 
-	//DataTable 
-	
-	//user table datatable
-	$('#user_table').DataTable({
+        //DataTable 
+
+        //user table datatable
+        $('#user_table').DataTable({
             "aLengthMenu": [[-1, 10, 25, 50, 100], ['All', "10 Per Page", "25 Per Page", "50 Per Page", "100 Per Page"]]
         });
 
-    //Complaints table datatable
-	$('#complaints_table').DataTable({
+        //Complaints table datatable
+        $('#complaints_table').DataTable({
             "aLengthMenu": [[-1, 10, 25, 50, 100], ['All', "10 Per Page", "25 Per Page", "50 Per Page", "100 Per Page"]]
         });
 
@@ -48,7 +63,7 @@
 
         //Chosen Selectbox
         $('.inputSelect').chosen();
-  })     
+    })     
 </script>
 
 </body>

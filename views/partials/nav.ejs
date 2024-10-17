@@ -1,7 +1,12 @@
 <header>
   <% if (!user) { %>
-  <h2>Page Not Found!</h2>
-  <a href="/" class="btn btn-primary">Back to Login</a>
+  <nav class="navbar navbar-custom">
+    <h3>
+      <a class="navbar-brand text-light" href="/">
+        Ticket Management</a
+      >
+  </nav>
+  
   <% } else{%>
 
   <nav class="navbar navbar-expand-md navbar-custom">
@@ -47,6 +52,9 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/complaints">Complaints</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
         </li>
       </ul>
 

@@ -5,13 +5,37 @@ const { forwardAuthenticated } = require("../config/auth");
 const { ensureAuthenticated } = require("../config/auth");
 
 //Login Handler
+// const user_login_handle = (req, res, next) => {
+//   passport.authenticate("local", {
+//     successRedirect: "/dashboard",
+//     failureRedirect: "/users/login",
+//     failureFlash: true,
+//     author: req.body,
+//     title: "Login",
+//   })(req, res, next);
+// };
+
+// Login Handler
 const user_login_handle = (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/users/login",
-    failureFlash: true,
-    author: req.body,
-    title: "Login",
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect("/users/login");
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      // Check the user's role and redirect accordingly.
+      if (user.role === "admin") {
+        return res.redirect("/dashboard");
+      } else {
+        return res.redirect("/complaints");
+      }
+    });
   })(req, res, next);
 };
 

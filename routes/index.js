@@ -68,6 +68,10 @@ router.get(
   complaintsController.complaint_update_close
 );
 
+//about page router
+router.get("/about", (req, res) => {
+  res.render("about", { title: "About", user: req.user });
+});
 // router.get("*", (req, res) => {
 //   res.render("404", { title: "404 - Not found", user: req.user });
 // });
