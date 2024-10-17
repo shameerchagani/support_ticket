@@ -1,9 +1,20 @@
 <header>
+  <% if (!user) { %>
+  <h2>Page Not Found!</h2>
+  <a href="/" class="btn btn-primary">Back to Login</a>
+  <% } else{%>
+
   <nav class="navbar navbar-expand-md navbar-custom">
     <h3>
-      <a class="navbar-brand text-light" href="/complaints"
-        >Ticket Management</a
+      <% if (user&&user.role === 'admin') { %>
+      <a class="navbar-brand text-light" href="/dashboard">
+        Ticket Management</a
       >
+      <% } else{%>
+      <a class="navbar-brand text-light" href="/complaints">
+        Ticket Management</a
+      >
+      <%}%>
     </h3>
     <button
       class="navbar-toggler text-dark"
@@ -20,14 +31,13 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <% if(user.role !== 'head') {%>
+      <% if(user && user.role === 'admin') {%>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/complaints"
-            >Home <span class="sr-only">(current)</span></a
+          <a class="nav-link" href="/dashboard"
+            >Dashboard <span class="sr-only">(current)</span></a
           >
         </li>
-        <% if (user.role === 'admin' || user.role==='Admin') { %>
         <li class="nav-item">
           <a class="nav-link" href="/users/manageUsers">Manage Users</a>
         </li>
@@ -37,7 +47,7 @@
           <a class="nav-link" href="/complaints">Complaints</a>
         </li>
       </ul>
-      <% } %>
+
       <span class="mr-5"
         >Welcome, <span class="text-light"><%= user.name %></span></span
       >
@@ -48,6 +58,7 @@
       </ul>
     </div>
   </nav>
+  <% } %>
 </header>
 <body>
   <div class="preloader" id="preloader"></div>

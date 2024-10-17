@@ -44,6 +44,9 @@
 .bg-teal {
   background-color: #004953;
 }
+.text-teal {
+  color: #004953;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -221,10 +224,10 @@ caption {
   color: #004953;
   vertical-align: middle;
 }
-table.dataTable tbody td{
+table.dataTable tbody td {
   font-size: 13px !important;
 }
-table.dataTable thead th{
+table.dataTable thead th {
   font-size: 14px !important;
 }
 
@@ -318,24 +321,24 @@ footer {
 
 /* Add Entry Form Styles */
 #frmEntry input,
-#frmEntry textarea{
+#frmEntry textarea {
   outline: none !important;
 }
 #frmEntry input:focus,
 #frmEntry textarea:focus,
-#frmEntry select:focus{
+#frmEntry select:focus {
   outline: none !important;
   box-shadow: 0 0 3px 2px lightgreen !important;
   border: 1px solid lightgreen !important;
 }
-div.frmCards{
+div.frmCards {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-div.frmCards .card{
+div.frmCards .card {
   width: 100%;
 }
-div.myEntriesList{
+div.myEntriesList {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;

@@ -22,7 +22,11 @@ router.get("/logout", userController.user_logout);
 router.get("/manageUsers", userController.user_list);
 
 //create user route
-router.post("/createUser", userController.user_create_handle);
+router.post(
+  "/createUser",
+  ensureAuthenticated,
+  userController.user_create_handle
+);
 
 //update User get route
 router.get(

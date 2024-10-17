@@ -8,6 +8,13 @@ router.get("/", (req, res) => {
   res.render("login", { title: "Login", appName: "Codepro Support" });
 });
 
+//Dashboard
+router.get(
+  "/dashboard",
+  ensureAuthenticated,
+  complaintsController.dashboard_get
+);
+
 //'===================================
 //Complaints Routes
 //'===================================
@@ -60,5 +67,9 @@ router.get(
   ensureAuthenticated,
   complaintsController.complaint_update_close
 );
+
+// router.get("*", (req, res) => {
+//   res.render("404", { title: "404 - Not found", user: req.user });
+// });
 
 module.exports = router;

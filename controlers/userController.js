@@ -7,7 +7,7 @@ const { ensureAuthenticated } = require("../config/auth");
 //Login Handler
 const user_login_handle = (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/complaints",
+    successRedirect: "/dashboard",
     failureRedirect: "/users/login",
     failureFlash: true,
     author: req.body,
@@ -30,6 +30,16 @@ const user_create_handle = async (req, res) => {
   const { name, email, password, password2, role } = req.body;
   let errors = [];
 
+  //check if user exists
+  if (!req.user || req.user.role !== "admin") {
+    errors.push({
+      msg: "Either you are not logged in or you are not an Admin User!",
+    });
+    return res.render("login", {
+      title: "Login",
+    });
+  }
+
   // Check if all fields are filled
   if (!name || !email || !password || !password2 || !role) {
     errors.push({ msg: "Please fill in all fields" });
@@ -41,7 +51,7 @@ const user_create_handle = async (req, res) => {
   }
 
   // If there are errors, re-render the form with the errors
-  if (errors.length > 0) {
+  if (req.user && errors.length > 0) {
     return res.render("manageUsers", {
       errors,
       name,
@@ -149,13 +159,17 @@ const user_update_handle = async (req, res, next) => {
 
 //Populate User list
 const user_list = async (req, res) => {
-  // if (req.user.role !== "admin") {
-  //   return res.render("404", { title: "404 - Not found", user: req.user });
-  // }
+  let errors = [];
+  if (!req.user || req.user.role !== "admin") {
+    errors.push({
+      msg: "Either you are not logged in or you are not an Admin User!",
+    });
+    return res.render("login", { title: "Login", user: req.user });
+  }
   const users = await User.find().sort({ name: 1, role: 1 });
   //console.log(users)
   res.render("manageUsers", {
-    title: "All Users",
+    title: "Manage Users",
     users,
     user: req.user,
   });
