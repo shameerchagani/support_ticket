@@ -8,7 +8,7 @@
       <h5 class="">Today:</h5>
       <section class="d-flex justify-content-around m-2">
         <div class="card shadow-lg rounded" style="width: 10rem">
-          <div class="card-header bg-danger p-0 m-0">
+          <div class="card-header bg-info p-0 m-0">
             <p class="text-center text-light p-0 m-0 fw-300">Complaints</p>
           </div>
           <p class="card-body text-danger text-center lead fw-800 p-2 m-0">
@@ -19,28 +19,32 @@
           <div class="card-header bg-warning p-0 m-0">
             <p class="text-center text-dark p-0 m-0 fw-300">In-Progress</p>
           </div>
-          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">150</p>
+          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">
+            <%= inProgressTodayCount %>
+          </p>
         </div>
         <div class="card rounded shadow-lg ml-2" style="width: 10rem">
           <div class="card-header bg-success p-0 m-0">
             <p class="text-center text-light p-0 m-0 fw-300">Resolved</p>
           </div>
           <p class="card-body text-success text-center lead fw-800 p-2 m-0">
-            150
+            <%= resolvedTodayCount %>
           </p>
         </div>
         <div class="card rounded shadow-lg ml-2" style="width: 10rem">
           <div class="card-header bg-dark p-0 m-0">
-            <p class="text-center text-light p-0 m-0 fw-300">Comments</p>
+            <p class="text-center text-light p-0 m-0 fw-300">Pending</p>
           </div>
-          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">150</p>
+          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">
+            <%= pendingTodayCount %>
+          </p>
         </div>
       </section>
       <hr />
       <h5 class="">Last 7 Days</h5>
       <section class="d-flex justify-content-start m-2">
         <div class="card shadow-lg rounded" style="width: 10rem">
-          <div class="card-header bg-danger p-0 m-0">
+          <div class="card-header bg-info p-0 m-0">
             <p class="text-center text-light p-0 m-0 fw-300">Complaints</p>
           </div>
           <p class="card-body text-danger text-center lead fw-800 p-2 m-0">
@@ -51,28 +55,32 @@
           <div class="card-header bg-warning p-0 m-0">
             <p class="text-center text-dark p-0 m-0 fw-300">In-Progress</p>
           </div>
-          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">150</p>
+          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">
+            <%= inProgressLast7DaysCount %>
+          </p>
         </div>
         <div class="card rounded shadow-lg ml-2" style="width: 10rem">
           <div class="card-header bg-success p-0 m-0">
             <p class="text-center text-light p-0 m-0 fw-300">Resolved</p>
           </div>
           <p class="card-body text-success text-center lead fw-800 p-2 m-0">
-            150
+            <%= resolvedLast7DaysCount %>
           </p>
         </div>
         <div class="card rounded shadow-lg ml-2" style="width: 10rem">
           <div class="card-header bg-dark p-0 m-0">
-            <p class="text-center text-light p-0 m-0 fw-300">Comments</p>
+            <p class="text-center text-light p-0 m-0 fw-300">Pending</p>
           </div>
-          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">150</p>
+          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">
+            <%= pendingLast7DaysCount %>
+          </p>
         </div>
       </section>
       <hr />
       <h5 class="">Last 30 Days:</h5>
       <section class="d-flex justify-content-start m-2">
         <div class="card shadow-lg rounded" style="width: 10rem">
-          <div class="card-header bg-danger p-0 m-0">
+          <div class="card-header bg-info p-0 m-0">
             <p class="text-center text-light p-0 m-0 fw-300">Complaints</p>
           </div>
           <p class="card-body text-danger text-center lead fw-800 p-2 m-0">
@@ -83,21 +91,25 @@
           <div class="card-header bg-warning p-0 m-0">
             <p class="text-center text-dark p-0 m-0 fw-300">In-Progress</p>
           </div>
-          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">150</p>
+          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">
+            <%= inProgressLast30DaysCount %>
+          </p>
         </div>
         <div class="card rounded shadow-lg ml-2" style="width: 10rem">
           <div class="card-header bg-success p-0 m-0">
             <p class="text-center text-light p-0 m-0 fw-300">Resolved</p>
           </div>
           <p class="card-body text-success text-center lead fw-800 p-2 m-0">
-            150
+            <%= resolvedLast30DaysCount %>
           </p>
         </div>
         <div class="card rounded shadow-lg ml-2" style="width: 10rem">
           <div class="card-header bg-dark p-0 m-0">
-            <p class="text-center text-light p-0 m-0 fw-300">Comments</p>
+            <p class="text-center text-light p-0 m-0 fw-300">Pending</p>
           </div>
-          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">150</p>
+          <p class="card-body text-dark text-center lead fw-800 p-2 m-0">
+            <%= pendingLast30DaysCount %>
+          </p>
         </div>
       </section>
     </section>

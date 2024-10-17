@@ -49,7 +49,7 @@ router.post(
 
 //Update Complaints status as pending
 router.get(
-  "/complaintInProgress/:id",
+  "/complaintPending/:id",
   ensureAuthenticated,
   complaintsController.complaint_update_pending
 );

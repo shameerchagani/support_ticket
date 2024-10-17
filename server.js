@@ -29,15 +29,34 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-//express session
+// //express session
+// app.use(
+//   session({
+//     secret: process.env.secret,
+//     resave: true,
+//     saveUninitialized: true,
+//     store: MongoStore.create({
+//       mongoUrl: process.env.uri,
+//     }),
+//   })
+// );
+
+// Configure session middleware express
 app.use(
   session({
     secret: process.env.secret,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.uri,
+      ttl: 1 * 24 * 60 * 60, // Set session expiration time in MongoDB (1 day)
+      autoRemove: "native", // Removes expired sessions automatically
     }),
+    cookie: {
+      maxAge: 15 * 60 * 1000, // Session expires in 15 minutes (client-side cookie)
+      httpOnly: true, // Prevents client-side JavaScript from accessing the cookie (security)
+      secure: process.env.NODE_ENV === "production", // Ensures cookies are only sent over HTTPS when in production
+    },
   })
 );
 

@@ -41,11 +41,68 @@ const dashboard_get = async (req, res) => {
         createdAt: { $gte: last30Days },
       });
 
+      //Count Pending tickets
+      const pendingTodayCount = await Complaints.countDocuments({
+        createdAt: { $gte: today },
+        status: { $in: ["Pending", "pending"] },
+      });
+
+      const pendingLast7DaysCount = await Complaints.countDocuments({
+        createdAt: { $gte: last7Days },
+        status: { $in: ["Pending", "pending"] },
+      });
+
+      const pendingLast30DaysCount = await Complaints.countDocuments({
+        createdAt: { $gte: last30Days },
+        status: { $in: ["Pending", "pending"] },
+      });
+
+      //Count Resolved tickets
+      const resolvedTodayCount = await Complaints.countDocuments({
+        updatedAt: { $gte: today },
+        status: { $in: ["Closed", "closed"] },
+      });
+
+      const resolvedLast7DaysCount = await Complaints.countDocuments({
+        updatedAt: { $gte: last7Days },
+        status: { $in: ["Closed", "closed"] },
+      });
+
+      const resolvedLast30DaysCount = await Complaints.countDocuments({
+        updatedAt: { $gte: last30Days },
+        status: { $in: ["Closed", "closed"] },
+      });
+
+      //Count Resolved tickets
+      const inProgressTodayCount = await Complaints.countDocuments({
+        updatedAt: { $gte: today },
+        status: { $in: ["in-progress", "In-Progress", "InProgress"] },
+      });
+
+      const inProgressLast7DaysCount = await Complaints.countDocuments({
+        updatedAt: { $gte: last7Days },
+        status: { $in: ["in-progress", "In-Progress", "InProgress"] },
+      });
+
+      const inProgressLast30DaysCount = await Complaints.countDocuments({
+        updatedAt: { $gte: last30Days },
+        status: { $in: ["in-progress", "In-Progress", "InProgress"] },
+      });
+
       // Send the result as a response
       res.status(200).render("dashboard", {
         todayCount,
         last7DaysCount,
         last30DaysCount,
+        pendingTodayCount,
+        pendingLast7DaysCount,
+        pendingLast30DaysCount,
+        resolvedTodayCount,
+        resolvedLast7DaysCount,
+        resolvedLast30DaysCount,
+        inProgressTodayCount,
+        inProgressLast7DaysCount,
+        inProgressLast30DaysCount,
         user: req.user,
         title: "Dashboard",
       });
@@ -202,7 +259,7 @@ const complaint_update_pending = async (req, res, next) => {
   try {
     // Find the complaint and update its status to "In-Progress"
     await Complaints.findByIdAndUpdate(req.params.id, {
-      $set: { status: "pending" },
+      $set: { status: "Pending" },
       updatedBy: req.user.name,
       updatedAt: Date.now(),
     });
