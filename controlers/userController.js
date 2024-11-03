@@ -21,9 +21,9 @@ const user_login_handle = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    if (!user) {
-      return res.redirect("/users/login");
-    }
+    // if (!user) {
+    //   return res.redirect("/users/login");
+    // }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
