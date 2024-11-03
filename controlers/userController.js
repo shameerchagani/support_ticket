@@ -16,7 +16,7 @@ const { ensureAuthenticated } = require("../config/auth");
 // };
 
 // Login Handler
-const user_login_handle = (req, res, next) => {
+const user_login_handle = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
