@@ -15,21 +15,23 @@ const { ensureAuthenticated } = require("../config/auth");
 //   })(req, res, next);
 // };
 
-// Login Handler
+//Login Handler
 const user_login_handle = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
+      console.error("Authentication error:", err);
       return next(err);
     }
-    // if (!user) {
-    //   return res.redirect("/users/login");
-    // }
+    if (!user) {
+      console.error("User not found:", info);
+      return res.redirect("/users/login");
+    }
     req.logIn(user, (err) => {
       if (err) {
+        console.error("Login error:", err);
         return next(err);
       }
 
-      // Check the user's role and redirect accordingly.
       if (user.role === "admin") {
         return res.redirect("/dashboard");
       } else {
